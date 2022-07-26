@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Image, StyleSheet, StatusBar } from "react-native";
 import { connect } from "react-redux";
-import { Container, Content, Form, Item, Input, Icon, Button, H3, Text, Spinner} from 'native-base';
+import { Container, Content, Form, Item, Input, Icon, Button, H3, Text, Spinner } from 'native-base';
 import AsyncStorage from "@react-native-community/async-storage";
 
 import { theme, container, formGroup, centeredItems, pt5, textCenter, borderRadius, backgroundGray, borderRadiusButton } from "../constants/styles";
@@ -50,12 +50,13 @@ class TableNum extends Component {
 
       try {
         await this.props.dispatch(regisTable(data));
-        
+
         await AsyncStorage.setItem('token', this.props.token.toString());
         await AsyncStorage.setItem('tableNum', this.props.tableNum.toString());
-        
+
         this.props.navigation.navigate('Main');
       } catch (err) {
+        console.log(err)
         alert('Cannot register your table! \nPlease try again!');
         console.log(`${config.API_URL}`);
       }
@@ -65,57 +66,57 @@ class TableNum extends Component {
   render() {
     return (
       <Container style={backgroundGray}>
-        <StatusBar barStyle = "light-content" backgroundColor="gray"/>
+        <StatusBar barStyle="light-content" backgroundColor="gray" />
         <Content style={[container]}>
           <View style={[centeredItems, styles.container]}>
             <View style={styles.imageContainer}>
-              <Image 
-                source={require('../assets/images/banner.png')} 
-                style={{width: '100%', height: 300, resizeMode: 'cover', marginTop: -40}}
+              <Image
+                source={require('../assets/images/banner.png')}
+                style={{ width: '100%', height: 300, resizeMode: 'cover', marginTop: -40 }}
               />
             </View>
 
             <View style={{
-  paddingBottom: 15,
-  paddingLeft: 0,
-  backgroundColor: 'white',
-  marginHorizontal: 25,
-  marginTop: -100,
-  height: 240,
-  borderRadius: 20,
-  elevation: 5
-}}>
+              paddingBottom: 15,
+              paddingLeft: 0,
+              backgroundColor: 'white',
+              marginHorizontal: 25,
+              marginTop: -100,
+              height: 240,
+              borderRadius: 20,
+              elevation: 5
+            }}>
               <H3 style={{
-  textAlign: "center",
-  marginTop: 20,
-  fontFamily: 'Montserrat-Regular'
-}}>Welcome!</H3>
+                textAlign: "center",
+                marginTop: 20,
+                fontFamily: 'Montserrat-Regular'
+              }}>Welcome!</H3>
               <Text style={{
-  textAlign: "center",
-  marginTop: 10,
-  fontFamily: 'OpenSans'
-}}>Let we know where your table</Text>
-            
-          
-            <Form style={[formGroup, styles.input]}>
-              <Item regular style={borderRadius}>
-                <Input maxLength={3} placeholder="Insert your table number here" keyboardType="numeric" onChangeText={this._handleInput} style={{textAlign: "center"}} />
-              </Item>
-            </Form>
-          
-            <View>
-              <Button disabled={this.state.buttonDisabled} block onPress={this._handleSubmit} style={[{borderRadius: 5, marginHorizontal: 30}, {backgroundColor: (this.state.buttonDisabled ? theme.color.grey : theme.color.primary)}]}>
-                {this.props.isLoading && (
-                  <Spinner color="#fff" />
-                )}
-                {!this.props.isLoading && (
-                  <Text style={{color: (this.state.buttonDisabled ? '#5a5a5a' : '#fff'), fontFamily: 'OpenSans-Semibold'}}>Order</Text>
-                )}
-              </Button>
-            </View>
+                textAlign: "center",
+                marginTop: 10,
+                fontFamily: 'OpenSans'
+              }}>Let we know where your table</Text>
+
+
+              <Form style={[formGroup, styles.input]}>
+                <Item regular style={borderRadius}>
+                  <Input maxLength={3} placeholder="Insert your table number here" keyboardType="numeric" onChangeText={this._handleInput} style={{ textAlign: "center" }} />
+                </Item>
+              </Form>
+
+              <View>
+                <Button disabled={this.state.buttonDisabled} block onPress={this._handleSubmit} style={[{ borderRadius: 5, marginHorizontal: 30 }, { backgroundColor: (this.state.buttonDisabled ? theme.color.grey : theme.color.primary) }]}>
+                  {this.props.isLoading && (
+                    <Spinner color="#fff" />
+                  )}
+                  {!this.props.isLoading && (
+                    <Text style={{ color: (this.state.buttonDisabled ? '#5a5a5a' : '#fff'), fontFamily: 'OpenSans-Semibold' }}>Order</Text>
+                  )}
+                </Button>
+              </View>
             </View>
           </View>
-          
+
         </Content>
       </Container>
     )
@@ -136,7 +137,7 @@ export default connect(mapStateToProps)(TableNum);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: -121, 
+    marginTop: -121,
     height: theme.dimensions.height
   },
   imageContainer: {

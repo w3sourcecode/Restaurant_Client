@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Provider } from "react-redux";
 
 // store
@@ -8,10 +8,15 @@ import Navigator from './src/_navigator/';
 
 console.disableYellowBox = true;
 
-const App = () => (
-  <Provider store={store}>
-    <Navigator />
-  </Provider>
-);
+const App: () => React$Node = () => {
+  return (
+    <>
+      <Provider store={store}>
+        <Navigator />
+      </Provider>
+    </>
+  );
+}
 
-export default App;
+
+  export default App;

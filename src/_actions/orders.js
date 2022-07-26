@@ -16,6 +16,7 @@ export const updateOrderQty = (data) => {
 }
 
 export const sendOrders = (data, headers) => {
+  console.log(data)
   return {
     type: 'SEND_ORDERS',
     payload: axios.post(`${API_URL}/api/v1/orders`, {orders: data}, headers)

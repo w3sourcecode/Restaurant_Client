@@ -2,6 +2,7 @@ import axios from "axios";
 import { API_URL } from "react-native-dotenv";
 
 export const regisTable = (data) => {
+  console.log(data)
   return {
     type: 'REGISTER_TABLE',
     payload: axios.post(`${API_URL}/api/v1/transaction/register_table`, data)
